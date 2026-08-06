@@ -1,27 +1,25 @@
 import streamlit as st
 import requests
 
-# ১. ব্রাউজার ট্যাব কনফিগারেশন
+# ১. অ্যাপের ব্রাউজার নাম ও লোগো সেট করা
 st.set_page_config(page_title="Tanim 2.0", layout="centered", page_icon="✨")
 
-# ২. জেমিনাই স্টাইল প্রফেশনাল ডার্ক থিম সিএসএস (CSS)
-st.markdown("<style>.stApp {background-color: #131314; color: #e3e3e3;} .brand-title {font-size: 40px; font-weight: 700; background: linear-gradient(45deg, #4285F4, #9B51E0, #FF6B6B); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; margin-bottom: 5px; font-family: sans-serif;} .brand-subtitle {text-align: center; color: #8e918f; font-size: 16px; margin-bottom: 40px;} .stChatInputContainer {border-radius: 28px !important; background-color: #1e1f20 !important; border: 1px solid #3c4043 !important;}</style>", unsafe_allowed_html=True)
+# ২. জেমিনাই স্টাইলে মেইন স্ক্রিন ব্র্যান্ডিং টাইটেল
+st.title("✦ Tanim 2.0")
+st.caption("Your personalized ultra-smart AI Assistant")
 
-# ৩. মেইন স্ক্রিন ব্র্যান্ডিং লোগো
-st.markdown('<div class="brand-title">✦ Tanim 2.0</div>', unsafe_allowed_html=True)
-st.markdown('<div class="brand-subtitle">Your personalized ultra-smart AI Assistant</div>', unsafe_allowed_html=True)
-
+# ৩. ফ্রি এআই মডেল লিংক
 API_URL = "https://huggingface.co"
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# চ্যাট মেসেজ রেন্ডার করা
+# চ্যাট মেসেজ হিস্ট্রি স্ক্রিনে দেখানো
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
 
-# ইউজার ইনপুট ও এআই রেসপন্স
+# ইউজার ইনপুট ও এআই রেসপন্স প্রসেস
 if prompt := st.chat_input("Ask Tanim 2.0 anything..."):
     st.chat_message("user").markdown(prompt)
     st.session_state.messages.append({"role": "user", "content": prompt})
@@ -32,7 +30,10 @@ if prompt := st.chat_input("Ask Tanim 2.0 anything..."):
         res = requests.post(API_URL, json=payload)
         if res.status_code == 200:
             response_json = res.json()
-            reply = response_json['generated_text'].replace(prompt, "").strip()
+            if isinstance(response_json, list):
+                reply = response_json[0]['generated_text'].replace(prompt, "").strip()
+            else:
+                reply = response_json['generated_text'].replace(prompt, "").strip()
         else:
             reply = "এআই সার্ভারটি এই মুহূর্তে কিছুটা ব্যস্ত। দয়া করে ১ সেকেন্ড পর আবার মেসেজ দিন।"
     except:
