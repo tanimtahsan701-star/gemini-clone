@@ -2,37 +2,7 @@ import streamlit as st
 import google.generativeai as genai
 
 # এখানে আপনার আসল API KEY বসাবেন
-genai.configure(api_key="import os
-from google import genai
-
-client = genai.Client(
-    api_key=os.environ.get("GEMINI_API_KEY"),
-)
-
-tools = [
-    {
-        'type': 'google_search',
-    },
-]
-
-generation_config = {
-    'temperature': 1,
-    'max_output_tokens': 65536,
-    'top_p': 0.95,
-    'thinking_level': 'high',
-}
-
-interaction = client.interactions.create(
-    model='models/gemini-3-flash-preview',
-    input='',
-    tools=tools,
-    generation_config=generation_config,
-)
-
-print(interaction.steps[-1])
-
-
-")
+genai.configure(api_key="AQ.Ab8RN6IgQ8_muycUXA1u3hCpSBmVaXmiF6HvdEcyvWrsxpfp3Q")
 model = genai.GenerativeModel("gemini-1.5-flash")
 
 st.set_page_config(page_title="Gemini Clone", layout="centered")
@@ -54,6 +24,7 @@ if prompt := st.chat_input("Ask Gemini anything..."):
     with st.chat_message("assistant"):
         st.markdown(response.text)
     st.session_state.messages.append({"role": "assistant", "content": response.text})
+
 
 
    
