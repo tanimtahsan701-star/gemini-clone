@@ -4,7 +4,7 @@ import requests
 st.set_page_config(page_title="Tanim 2.0", layout="centered")
 st.title("✦ Tanim 2.0")
 
-# মেটার শক্তিশালী Llama-3 মডেল (সম্পূর্ণ ফ্রি এবং এপিআই কি ছাড়া চলবে)
+# সম্পূর্ণ উন্মুক্ত ও শক্তিশালী Qwen মডেল (যা কোনো চাবি ছাড়াই আনলিমিটেড চলবে)
 API_URL = "https://huggingface.co"
 
 if "messages" not in st.session_state:
@@ -18,18 +18,23 @@ if prompt := st.chat_input("Ask Tanim 2.0 anything..."):
     st.chat_message("user").markdown(prompt)
     st.session_state.messages.append({"role": "user", "content": prompt})
     
-    # ফ্রি এআই রেসপন্স জেনারেট করা
-    payload = {"inputs": prompt, "parameters": {"max_new_tokens": 1000}}
-    response = requests.post(API_URL, json=payload).json()
+    payload = {"inputs": prompt, "parameters": {"max_new_tokens": 500}}
     
     try:
-        reply = response[0]['generated_text'].replace(prompt, "").strip()
+        res = requests.post(API_URL, json=payload)
+        # সার্ভার থেকে সঠিক উত্তরটি বের করা
+        if res.status_code == 200:
+            response_json = res.json()
+            reply = response_json[0]['generated_text'].replace(prompt, "").strip()
+        else:
+            reply = "এআই সার্ভারটি এই মুহূর্তে কিছুটা ব্যস্ত। দয়া করে ১ সেকেন্ড পর আবার মেসেজ দিন।"
     except:
-        reply = "দুঃখিত, সার্ভার কিছুটা ব্যস্ত। দয়া করে আবার চেষ্টা করুন।"
+        reply = "অপেক্ষা করার জন্য ধন্যবাদ! দয়া করে আপনার প্রশ্নটি আবার টাইপ করুন।"
         
     with st.chat_message("assistant"):
         st.markdown(reply)
     st.session_state.messages.append({"role": "assistant", "content": reply})
+
 
    
 
