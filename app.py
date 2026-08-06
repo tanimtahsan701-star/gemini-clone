@@ -2,7 +2,9 @@ import streamlit as st
 import google.generativeai as genai
 
 # এখানে আপনার আসল API KEY বসাবেন
-genai.configure(api_key="AQ.Ab8RN6K7mHcI_ABEV3tWcc4uhfDwKqatcih_YCsNktv2oNioyA")
+genai.configure(api_key="AIzaSyN6KZTZraESW710FpNehB3sLIw6itxf7ow3apxGNB2B0Kew")
+")
+")
 model = genai.GenerativeModel("gemini-1.5-flash")
 
 st.set_page_config(page_title="Gemini Clone", layout="centered")
