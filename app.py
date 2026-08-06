@@ -1,14 +1,16 @@
 import streamlit as st
 import requests
 
-# ১. অ্যাপের ব্রাউজার নাম ও লোগো সেট করা
-st.set_page_config(page_title="Tanim 2.0", layout="centered", page_icon="✨")
+# ১. ব্রাউজারের ট্যাবের নাম এবং লোগো সেট করা
+st.set_page_config(page_title="Tanim Gemini", layout="centered", page_icon="✨")
 
-# ২. জেমিনাই স্টাইলে মেইন স্ক্রিন ব্র্যান্ডিং টাইটেল
-st.title("✦ Tanim 2.0")
+# ২. স্ট্রিমলিটের লোগো, মেনু এবং ক্রেডিট চিরতরে লুকানোর জন্য লাল এরর-মুক্ত সহজ কোড
+st.markdown("<style>#MainMenu {visibility: hidden;} footer {visibility: hidden;} header {visibility: hidden;} .stAppDeployButton {display: none;}</style>", unsafe_allowed_html=True)
+
+# ৩. মেইন স্ক্রিনে আপনার পছন্দের নাম
+st.title("✦ Tanim Gemini")
 st.caption("Your personalized ultra-smart AI Assistant")
 
-# ৩. ফ্রি এআই মডেল লিংক
 API_URL = "https://huggingface.co"
 
 if "messages" not in st.session_state:
@@ -20,7 +22,7 @@ for msg in st.session_state.messages:
         st.markdown(msg["content"])
 
 # ইউজার ইনপুট ও এআই রেসপন্স প্রসেস
-if prompt := st.chat_input("Ask Tanim 2.0 anything..."):
+if prompt := st.chat_input("Ask Tanim Gemini anything..."):
     st.chat_message("user").markdown(prompt)
     st.session_state.messages.append({"role": "user", "content": prompt})
     
@@ -42,9 +44,6 @@ if prompt := st.chat_input("Ask Tanim 2.0 anything..."):
     with st.chat_message("assistant"):
         st.markdown(reply)
     st.session_state.messages.append({"role": "assistant", "content": reply})
-
-
-
 
 
 
