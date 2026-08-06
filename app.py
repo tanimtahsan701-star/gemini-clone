@@ -1,16 +1,17 @@
 import streamlit as st
 import requests
 
-# ১. ব্রাউজারের ট্যাবের নাম এবং লোগো সেট করা
+# ১. অ্যাপের ব্রাউজার নাম ও লোগো সেট করা
 st.set_page_config(page_title="Tanim Gemini", layout="centered", page_icon="✨")
 
-# ২. স্ট্রিমলিটের লোগো, মেনু এবং ক্রেডিট চিরতরে লুকানোর জন্য লাল এরর-মুক্ত সহজ কোড
+# ২. স্ট্রিমলিটের লোগো, মেনু এবং ক্রেডিট চিরতরে লুকানোর জন্য সম্পূর্ণ সুরক্ষিত কোড
 st.markdown("<style>#MainMenu {visibility: hidden;} footer {visibility: hidden;} header {visibility: hidden;} .stAppDeployButton {display: none;}</style>", unsafe_allowed_html=True)
 
 # ৩. মেইন স্ক্রিনে আপনার পছন্দের নাম
 st.title("✦ Tanim Gemini")
 st.caption("Your personalized ultra-smart AI Assistant")
 
+# ৪. ফ্রি এআই মডেল লিংক
 API_URL = "https://huggingface.co"
 
 if "messages" not in st.session_state:
@@ -45,9 +46,6 @@ if prompt := st.chat_input("Ask Tanim Gemini anything..."):
         st.markdown(reply)
     st.session_state.messages.append({"role": "assistant", "content": reply})
 
-
-
-   
 
    
 
