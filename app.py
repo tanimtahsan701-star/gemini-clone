@@ -2,10 +2,10 @@ import streamlit as st
 import requests
 
 # ১. অ্যাপের ব্রাউজার নাম ও লোগো সেট করা
-st.set_page_config(page_title="Tanim Gemini", layout="centered", page_icon="✨")
+st.set_page_config(page_title="Tanim Gemini 2.0", layout="centered", page_icon="✨")
 
 # ২. মেইন স্ক্রিনে আপনার পছন্দের নাম
-st.title("✦ Tanim Gemini")
+st.title("✦ Tanim 2.0")
 st.caption("Your personalized ultra-smart AI Assistant")
 
 # ৩. ফ্রি এআই মডেল লিংক
