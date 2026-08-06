@@ -6,7 +6,7 @@ genai.configure(api_key="AQ.Ab8RN6IgQ8_muycUXA1u3hCpSBmVaXmiF6HvdEcyvWrsxpfp3Q")
 model = genai.GenerativeModel("gemini-1.5-flash")
 
 st.set_page_config(page_title="Gemini Clone", layout="centered")
-st.title("✦ Gemini Official Clone")
+st.title("✦ Tanim 2.o")
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
